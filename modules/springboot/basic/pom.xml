@@ -72,6 +72,7 @@
 	</dependencyManagement>
 	<modules>
 		<module>startup</module>
+		<module>command</module>
 	</modules>
 <!--父POM设定plugin management，用于管理所有子模块的plugin-->
 	<build>

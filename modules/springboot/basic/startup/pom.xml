@@ -8,7 +8,7 @@
         <artifactId>basic</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>startup-listeners</artifactId>
+    <artifactId>startup</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>

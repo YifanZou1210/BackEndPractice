@@ -33,12 +33,13 @@
 	</properties>
 	<dependencyManagement>
 		<dependencies>
+			<!-- 导入 Spring Boot 官方 BOM (Bill of Materials)，统一管理所有 spring-boot-starter-* 的版本 -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
 				<version>3.4.5</version>
-				<type>pom</type>
-				<scope>import</scope>
+				<type>pom</type> <!-- 表明该依赖引用的是一个 POM 类型的项目，用于版本管理 -->
+				<scope>import</scope> <!-- 指定仅导入其 dependencyManagement 配置，不会将其打包到应用中 -->
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
@@ -70,6 +71,24 @@
 		</dependencies>
 	</dependencyManagement>
 	<modules>
-		<module>startup-listeners</module>
+		<module>startup</module>
 	</modules>
+<!--父POM设定plugin management，用于管理所有子模块的plugin-->
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>3.4.5</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

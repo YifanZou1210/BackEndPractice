@@ -1,0 +1,24 @@
+<!--如果后续需要对访问自定义端点进行审计，同时对敏感数据脱敏，可在customEndpoint内部添加日志记录，并在序列化前对敏感字段做处理-->
+<!--将 com.backend.endpoint.CustomEndpoint 类的日志输出到 logs/audit.log，并按日期滚动，保留 30 天。-->
+<configuration>
+    <appender name="AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/audit.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/audit-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 为 CustomEndpoint 类单独分配一个日志记录器 -->
+    <logger name="com.backend.endpoint.CustomEndpoint" level="INFO" additivity="false">
+        <appender-ref ref="AUDIT" />
+    </logger>
+
+    <root level="INFO">
+        <!-- 其余日志也输出到同一个文件，或可另行配置 -->
+        <appender-ref ref="AUDIT" />
+    </root>
+</configuration>

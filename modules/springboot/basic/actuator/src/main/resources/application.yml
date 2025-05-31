@@ -1,0 +1,28 @@
+# 暴露默认与自定义port
+# 一般将 include: "*" 改为只暴露 health, metrics, custom
+spring:
+  application:
+    name: basic
+  main:
+    banner-mode: off
+server:
+  port: 8081
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, custom # 暴露PORT
+  endpoint:
+    health:
+      enabled: true # 确保health port启动
+    metrics:
+      enabled: true
+    custom:
+      enabled: true
+  metrics:
+    export:
+      simple:
+        enabled: true # 简单的metrics 导出
+      prometheus:
+        enabled: false # 如果后续要启动Prometheus，这里设为true并配置/actuator/prometheus
+        # 然后在Prometheus配置中添加抓取地址

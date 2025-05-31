@@ -17,5 +17,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
             SpringApplication app = new SpringApplication(StartupListenersApplication.class);
             app.addListeners(new StartupEventListener());
             app.run(args);
+            
         }
     }
